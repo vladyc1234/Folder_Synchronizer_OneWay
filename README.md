@@ -39,6 +39,7 @@ Results: The script will start the synchronization in a one way manner from sour
 3. List of Changes: The changes list is initialized as an empty list. This list will be used to keep track of file system changes (e.g., file creation, modification, deletion, movement) that need to be synchronized between the source and destination folders.
 
 4. FolderSyncer Class: The FolderSyncer class is defined to handle folder synchronization. It is initialized with the source and destination folder paths.
+
 - The __enter__ method starts a file system observer from the Watchdog library and returns the FolderSyncer instance.
 - The __run__ method is the main loop of the synchronization process. It continuously checks for changes in the source folder and performs the necessary actions to synchronize files and directories with the destination folder.
 - The __exit__ method stops the file system observer when the with block is exited.
