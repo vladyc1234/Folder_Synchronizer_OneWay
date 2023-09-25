@@ -12,7 +12,7 @@
 
 - Pycharm Community edition
 
-## Libraries:
+## Packages:
 
 * pip 23.2.1
 * setuptools 68.2.2
