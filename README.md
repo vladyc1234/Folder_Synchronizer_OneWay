@@ -15,7 +15,7 @@
 ## Libraries:
 
 * pip 23.2.1
-* setuptools 68.2.2 - notable libraries used:
+* setuptools 68.2.2
 * watchdog 3.0.0
 
 ## How to use:
