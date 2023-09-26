@@ -28,7 +28,7 @@
 
 4. Run the script and provide paths for the two folders, logging file and synchronization interval (command format: python name_of_your_project.py folder_path(source)(string) folder_path(destination)(string) synchronization_interval(optional)(integer)
    
-	Ex: for folder E:\SyncA and E:\SyncB with logging file E:\log_file.txt with use the command as follows: python main.py E:\SyncA E:\SyncB E:\log_file.txt 
+	Ex: for folder E:\SyncA and E:\SyncB with logging file E:\log_file.txt use the command as follows: python main.py E:\SyncA E:\SyncB E:\log_file.txt 
 
 Results: The script will start the synchronization in a one way manner from source to destination
 
