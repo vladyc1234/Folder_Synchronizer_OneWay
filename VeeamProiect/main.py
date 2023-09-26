@@ -36,9 +36,8 @@ console_handler.setLevel(logging.INFO)  # Set the console handler's level to INF
 
 # Create a file handler to log messages to a file
 try:
-    if pathlib.Path(console_arguments.args.log_file) not in pathlib.Path("E:").iterdir():
-        open(console_arguments.args.log_file, "w")
-        file_handler = logging.FileHandler(console_arguments.args.log_file)
+    open(console_arguments.args.log_file, "w")
+    file_handler = logging.FileHandler(console_arguments.args.log_file)
 except PermissionError:
     logging.warning("Insufficient permissions or file name is invalid")
     sys.exit(1)
