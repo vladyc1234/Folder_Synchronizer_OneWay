@@ -30,7 +30,7 @@
    
 	Ex: for folder E:\SyncA and E:\SyncB with logging file E:\log_file.txt use the command as follows: python main.py E:\SyncA E:\SyncB E:\log_file.txt 
 
-Results: The script will start the synchronization in a one way manner from source to destination
+Results: The script will start the synchronization in a one-way manner from source to destination
 
 ## How does the script work
 
