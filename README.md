@@ -49,8 +49,6 @@ Results: The script will start the synchronization in a one-way manner from sour
 5. EventHandler Class: The EventHandler class is a subclass of FileSystemEventHandler from the Watchdog library. It overrides methods to handle specific file system events (e.g., on_moved, on_created, on_deleted, on_modified) and adds the corresponding change to the changes list.
 
 6. Folder Synchronization: The script uses an instance of the FolderSyncer class to monitor and synchronize the source and destination folders. The with block ensures that the file system observer is properly started and stopped.
-
-Overall, this script provides a basic framework for real-time folder synchronization, monitoring changes in the source folder, and applying those changes to the destination folder. The script is configured using command-line arguments, and log messages are generated to track the synchronization process and any detected file system events.
 	
 
 		
