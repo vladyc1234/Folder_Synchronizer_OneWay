@@ -5,6 +5,7 @@ from watchdog.events import FileSystemEventHandler
 import time
 import shutil
 import argparse
+import sys
 
 class ConsoleArguments:
     def __init__(self):
@@ -34,10 +35,14 @@ console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.INFO)  # Set the console handler's level to INFO
 
 # Create a file handler to log messages to a file
-if pathlib.Path(console_arguments.args.log_file) not in pathlib.Path("E:").iterdir():
-    open(console_arguments.args.log_file, "w")
+try:
+    if pathlib.Path(console_arguments.args.log_file) not in pathlib.Path("E:").iterdir():
+        open(console_arguments.args.log_file, "w")
+        file_handler = logging.FileHandler(console_arguments.args.log_file)
+except PermissionError:
+    logging.warning("Insufficient permissions or file name is invalid")
+    sys.exit(1)
 
-file_handler = logging.FileHandler(console_arguments.args.log_file)
 file_handler.setLevel(logging.INFO)  # Set the file handler's level to DEBUG
 
 # Create a formatter to define the log message format
@@ -68,6 +73,15 @@ class FolderSyncer(object):
         self.last_action_time = time.time()
         logger.debug(f"\nSource path:\t\t{self.source_path}\n"
                       f"Destination path:\t{self.destination_path}")
+
+        # Check source and destination folders
+        if not self.destination_path.exists():
+            logging.warning("Destination folder doesn't exist")
+            raise FileNotFoundError
+        if not self.source_path.exists():
+            logging.warning("Source folder doesn't exist")
+            raise FileNotFoundError
+
         # Make a file system observer
         self.observer = Observer()
         # Schedule it with our EventHandler(), the path, and recursive
@@ -84,6 +98,16 @@ class FolderSyncer(object):
 
     def run(self):
         while True:
+
+            # Check source and destination folders
+            if not self.destination_path.exists():
+                logging.warning("Destination folder doesn't exist")
+                break
+            if not self.source_path.exists():
+                logging.warning("Source folder doesn't exist")
+                break
+
+            # Constantly synchronize the folders at a set interval
             self.current_time = time.time()
             if self.current_time - self.last_action_time >= self.interval:
                 for item in self.source_path.iterdir():
@@ -92,7 +116,6 @@ class FolderSyncer(object):
                         (self.destination_path / str(item).replace(str(self.source_path), "")[1:]).write_bytes(
                             pathlib.Path(str(item)).read_bytes()
                         )
-                    # Else, it's a directory
                     else:
                         try:
                             # Copy folder recursively
